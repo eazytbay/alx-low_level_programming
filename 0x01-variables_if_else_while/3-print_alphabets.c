@@ -5,13 +5,17 @@
  */
 int main(void)
 {
-for (char alpha_bet = 'a'; alpha_bet <= 'z'; alpha_bet++)
+char alpha_lower = 'a';
+char alpha_upper = 'A';
+while (alpha_lower <= 'z')
 {
-putchar(alpha_bet); /* displays the present lower case*/
+putchar(alpha_lower); /* displays the present lower case*/
+alpha_lower++;
 }
-for (char alpha_bet = 'A'; alpha <= 'Z'; alpha_bet++)
+while (alpha_upper <= 'Z')
 {
-putchar(alpha_bet); /* displays the current uppercase letter this time*/
+putchar(alpha_upper); /* displays the current uppercase letter this time*/
+alpha_upper++;
 }
 putchar('\n'); /* new line character*/
 return (0);
