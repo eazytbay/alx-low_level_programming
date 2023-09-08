@@ -5,7 +5,7 @@
  */
 int main(void)
 {
-char  = 'a'; /*Begin with the firs lowercase alphabeh*/
+char alph  = 'a'; /*Begin with the firs lowercase alphabeh*/
 /*The loop function is used to print the alphabet*/
 while (alph <= 'z')
 {
