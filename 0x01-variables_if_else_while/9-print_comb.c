@@ -1,4 +1,4 @@
-#include <unistdio.h>
+#include <unistd.h>
 /**
  * main - A program that prints all possible combination single digit number
  * Return: 0 = success
