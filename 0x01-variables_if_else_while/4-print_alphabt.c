@@ -15,6 +15,6 @@ putchar(alpha_lowercase);
 }
 alpha_lowercase++;
 }
-putchar('\n')
+putchar('\n');
 return (0);
 }
