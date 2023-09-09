@@ -6,10 +6,16 @@
 int main(void)
 {
 int num = '0';
-while (num <= 'f')
+char letter;
+while (num < '10')
 {
 putchar(num);
 num++;
+}
+while (letter <= 'f')
+{
+putchar(letter)
+letter++;
 }
 putchar('\n');
 return (0);
