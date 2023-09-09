@@ -6,12 +6,14 @@
  */
 int main(void)
 {
-for (char alpha_lowercase = 'a'; alpha_lowercase <= 'z'; alpha_lowercase++)
+char alpha_lowercase = 'a';
+while (alpha_lowercase <= 'z')
 {
-	if (alpha_lowercase != 'e' && alpha_lowercase != 'q'
+if (alpha_lowercase != 'e' && alpha_lowercase != 'q')
 {
 putchar(alpha_lowercase);
 }
+alpha_lowercase++;
 }
 putchar('\n')
 return (0);
