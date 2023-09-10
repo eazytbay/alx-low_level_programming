@@ -12,8 +12,8 @@ while (num1 <= 8)
 int num2 = num1 + 1;
 while (num2 <= 9)
 {
-putchar(num1);
-putchar(num2);
+putchar('0' + num1);
+putchar('0' + num2);
 if (num1 != 8 || num2 != 9)
 {
 putchar(',');
