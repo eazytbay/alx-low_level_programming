@@ -5,28 +5,29 @@
  */
 int main(void)
 {
-int a = 0;
-while (a <= 7)
+int num1 = 0;
+int num2;
+int num3;
+while (num1 <= 7)
 {
-int b = a + 1;
-while (b <= 8)
-int c = b + 1;
-while (c <= 9)
+num2 = num1 + 1;
+while (num2 <= 8)
 {
-putchar(a + '0'); /* Print the first digit*/
-putchar(b + '0'); /* Print the second digit*/
-putchar(c + '0'); /* Print the third digit*/
-if (a < 7)
+num3 = num2 + 1;
+while (num3 <= 9)
 {
-putchar(','); /*Print a comma*/
-putchar(' '); /* Print a space*/
+putchar('0' + num1);
+putchar('0' + num2);
+putchar('0' + num3);
+if (num1 != 7 || num2 != 8 || num3 != 9)
+{
+putchar(',');
+putchar(' ');
 }
-c++;
+num3++;
 }
-b++;
+num2++;
 }
-a++;
-}
-putchar('\n'); /* Print a newline character*/
+num1++;
 return (0);
 }
