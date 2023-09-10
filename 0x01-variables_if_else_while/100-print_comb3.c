@@ -6,8 +6,7 @@
  */
 int main(void)
 {
-char num1 = '0'
-char num2;
+char num1 = '0';
 while (num1 <= '8')
 {
 num2 = num1 + 1;
@@ -20,9 +19,9 @@ if (num1 != '8' || num2 != '9')
 putchar(',');
 putchar(' ');
 }
-num2++
+num2++;
 }
-num1++
+num1++;
 }
 putchar('\n');
 return (0);
