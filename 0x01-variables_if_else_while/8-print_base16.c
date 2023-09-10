@@ -5,18 +5,12 @@
  */
 int main(void)
 {
-int num = '0';
-while (num < 16)
+char hex_digits[] = "0123456789abcdef";
+int a = 0;
+while (a < 16)
 {
-if (num < 10)
-{
-putchar(num + '0');
-}
-else
-}
-putchar(num - 10 + 'a');
-}
-num++;
+putchar(hex_digits[a]);
+a++;
 }
 putchar('\n');
 return (0);
