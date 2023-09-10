@@ -6,7 +6,7 @@
 int main(void)
 {
 int num = '0';
-while (num < '16')
+while (num < 16)
 {
 if (num < 10)
 {
