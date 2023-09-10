@@ -10,7 +10,14 @@ int n = 0;
 while (n <= 9)
 {
 printf("%d", n);
-printf('\n')
+if (n < 9)
+{
+printf(" ");
+{
+else
+}
+printf("\n")
+}
 n++;
 }
 return (0);
