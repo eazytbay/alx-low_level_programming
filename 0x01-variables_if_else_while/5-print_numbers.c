@@ -10,13 +10,8 @@ int n = 0;
 while (n <= 9)
 {
 printf("%d", n);
-if (n < 9)
 {
-printf(" ");
-{
-else
-}
-printf("\n")
+printf("\n");
 }
 n++;
 }
