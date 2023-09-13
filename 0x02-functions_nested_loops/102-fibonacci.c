@@ -9,11 +9,11 @@ int main(void)
 int n = 50;
 int a = 1, b = 2;
 int i = 1;
-int temp;
+long long temp;
 printf("The first 50 Fibonacci numbers are: ");
 while (i <= n)
 {
-printf("%d", a);
+printf("%lld", a);
 if (i < n)
 {
 printf(", ");
