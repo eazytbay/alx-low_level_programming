@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 /**
  * main - A program that prints the first 98 fibonacci
  * starting with 1 and 2
@@ -7,19 +7,17 @@
 int main(void)
 {
 int n = 98;
-int a = 1, b = 2;
-int i = 1;
-int temp = a + b;
-/*Print the first two Fibonacci numbers (1 and 2)*/
-printf("%d, %d", a, b);
-while (i <= n - 2)
+unsigned long long a = 1, b = 2;
+unsigned long long temp = a + b;
+printf("%llu, %llu, ", a, b);
+int count = 2;
+while (count < n)
 {
 a = b;
 b = temp;
-printf(", %d", b);
-i++;
+printf("%llu, ", b);
+count++;
 }
 printf("\n");
 return (0);
 }
-
