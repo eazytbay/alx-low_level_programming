@@ -10,7 +10,7 @@ int n = 50;
 long a = 1, b = 2;
 int i = 1;
 long temp;
-printf("The first 50 Fibonacci numbers are: ");
+printf(" ");
 while (i <= n)
 {
 printf("%ld", a);
