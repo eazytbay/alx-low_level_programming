@@ -7,7 +7,7 @@
 int main(void)
 {
 int n = 50;
-int a = 1, b = 2;
+long a = 1, b = 2;
 int i = 1;
 long temp;
 printf("The first 50 Fibonacci numbers are: ");
