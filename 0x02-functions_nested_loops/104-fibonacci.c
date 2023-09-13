@@ -6,7 +6,6 @@
  */
 int main(void)
 {
-int n = 98;
 unsigned long a = 1, b = 2;
 unsigned long temp = a + b;
 int count = 2;
