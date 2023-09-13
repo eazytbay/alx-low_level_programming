@@ -8,6 +8,8 @@ int main(void)
 {
 int n = 50;
 int a = 1, b = 2;
+int i = 1;
+int temp;
 printf("The first 50 Fibonacci numbers are: ");
 while (i <= n)
 {
@@ -20,7 +22,7 @@ else
 {
 printf("\n");
 }
-int temp = a;
+temp = a;
 a = b;
 b = temp + b;
 i++;
