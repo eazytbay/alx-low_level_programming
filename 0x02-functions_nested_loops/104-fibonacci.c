@@ -8,19 +8,15 @@ int main(void)
 {
 int n = 98;
 int a = 1, b = 2;
-int i = 2;
+int i = 1;
 int temp = a + b;
 /*Print the first two Fibonacci numbers (1 and 2)*/
 printf("%d, %d", a, b);
-while (i < n)
+while (i <= n - 2)
 {
 a = b;
 b = temp;
 printf(", %d", b);
-if (i < n - 1)
-{
-printf(", ");
-}
 i++;
 }
 printf("\n");
