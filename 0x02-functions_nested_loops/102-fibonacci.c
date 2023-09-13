@@ -10,7 +10,6 @@ int n = 50;
 long a = 1, b = 2;
 int i = 1;
 long temp;
-printf(" ");
 while (i <= n)
 {
 printf("%ld", a);
