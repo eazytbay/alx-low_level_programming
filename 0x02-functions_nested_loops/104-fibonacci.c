@@ -11,7 +11,7 @@ unsigned long a = 1, b = 2;
 unsigned long temp = a + b;
 int count = 2;
 printf("%lu, %lu, ", a, b);
-while (count < n)
+while (count < 98)
 {
 a = b;
 b = temp;
