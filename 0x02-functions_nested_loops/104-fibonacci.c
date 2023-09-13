@@ -17,6 +17,10 @@ while (i < n)
 a = b;
 b = temp;
 printf(", %d", b);
+if (i < n - 1)
+{
+printf(", ");
+}
 i++;
 }
 printf("\n");
