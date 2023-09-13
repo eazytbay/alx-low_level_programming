@@ -7,15 +7,15 @@
 int main(void)
 {
 int n = 98;
-unsigned long long a = 1, b = 2;
-unsigned long long temp = a + b;
-printf("%llu, %llu, ", a, b);
+unsigned long a = 1, b = 2;
+unsigned long temp = a + b;
+printf("%lu, %lu, ", a, b);
 int count = 2;
 while (count < n)
 {
 a = b;
 b = temp;
-printf("%llu, ", b);
+printf("%lu, ", b);
 count++;
 }
 printf("\n");
