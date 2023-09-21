@@ -12,27 +12,18 @@
 char *leet(char *str)
 {
 char *p = str;
+char replacements[128] = {0};
+replacements['a'] = replacements['A'] = '4';
+replacements['e'] = replacements['E'] = '3';
+replacements['o'] = replacements['O'] = '0';
+replacements['t'] = replacements['T'] = '7';
+replacements['l'] = replacements['L'] = '1';
 while (*p)
 {
-if (*p == 'a' || *p == 'A')
+char replace = replacements[(int)*p];
+if (replace)
 {
-*p = '4';
-}
-else if (*p == 'e' || *p == 'E')
-{
-*p = '3';
-}
-else if (*p == 'o' || *p == 'O')
-{
-*p = '0';
-}
-else if (*p == 't' || *p == 'T')
-{
-*p = '7';
-}
-else if (*p == 'l' || *p == 'L')
-{
-*p = '1';
+*p = replace;
 }
 p++;
 }
