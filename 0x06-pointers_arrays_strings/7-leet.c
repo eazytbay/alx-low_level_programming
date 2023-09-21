@@ -14,33 +14,27 @@ char *leet(char *str)
 char *p = str;
 while (*p)
 {
-char replace = 0;
 if (*p == 'a' || *p == 'A')
 {
-replace = '4';
+*p = '4';
 }
 else if (*p == 'e' || *p == 'E')
 {
-replace = '3';
+*p = '3';
 }
 else if (*p == 'o' || *p == 'O')
 {
-replace = '0';
+*p = '0';
 }
 else if (*p == 't' || *p == 'T')
 {
-replace = '7';
+*p = '7';
 }
 else if (*p == 'l' || *p == 'L')
 {
-replace = '1';
-}
-if (replace)
-{
-*p = replace;
+*p = '1';
 }
 p++;
 }
 return (str);
 }
-
