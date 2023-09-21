@@ -6,29 +6,41 @@
  * Letters o and O should be replaced by 0
  * Letters t and T should be replaced by 7
  * Letters l and L should be replaced by 1
- * @p: pointer to string
+ * @str: the string to be encoded
  * Return: pointer to p.
  */
-char *leet(char *p)
+char *leet(char *str)
 {
-int length_string;
-char leetlet[] = "aAeEoOtTlL";
-char leet_nums[] = "4433007711";
-char *p = leet;
-length_string = 0;
-while (p[length_string] != '\0')
+char *p = str;
+while (*p)
 {
-int countleet = 0;
-while (countleet < 10)
+char replace = 0;
+if (*p == 'a' || *p == 'A')
 {
-if (leetlet[countleet] == p[length_string])
-{
-p[length_string] = leet_nums[countleet];
+replace = '4';
 }
-countleet++;
+else if (*p == 'e' || *p == 'E')
+{
+replace = '3';
 }
-length_string++;
+else if (*p == 'o' || *p == 'O')
+{
+replace = '0';
 }
-return (p);
+else if (*p == 't' || *p == 'T')
+{
+replace = '7';
+}
+else if (*p == 'l' || *p == 'L')
+{
+replace = '1';
+}
+if (replace)
+{
+*p = replace;
+}
+p++;
+}
+return (str);
 }
 
