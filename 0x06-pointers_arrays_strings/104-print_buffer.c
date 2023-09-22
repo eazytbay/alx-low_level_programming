@@ -5,26 +5,27 @@
  * print_buffer - A Function that prints the 
  * content of size bytes of the buffer
  * @b: The pointer to the buffer
+ * @size: size of the buffer
  * Return: Always 0
  */
-void print_buffer(char *b, int size) 
+void print_buffer(char *b, int size)
 {
-int i;
-int j;
+int i = 0;
+int position = 0;
 if (size <= 0)
 {
 printf("\n");
 return;
 }
-for (i = 0; i < size; i += 10)
+while (position < size)
 {
-printf("%08x: ", i);
-for (j = 0; j < 10; j++)
+printf("%08x: ", position);
+while (i < 10)
 {
-if (i + j < size)
+if (position + i < size)
 {
-printf("%02x", (unsigned char)b[i + j]);
-if (j % 2 != 0)
+printf("%02x", (unsigned char)b[position + i]);
+if (i % 2 != 0)
 {
 printf(" ");
 }
@@ -33,13 +34,15 @@ else
 {
 printf("  ");
 }
+i++;
 }
 printf(" ");
-for (j = 0; j < 10; j++)
+i = 0;
+while (i < 10)
 {
-if (i + j < size)
+if (position + i < size)
 {
-char c = b[i + j];
+char c = b[position + i];
 if (isprint(c))
 {
 printf("%c", c);
@@ -49,8 +52,9 @@ else
 printf(".");
 }
 }
+i++;
 }
 printf("\n");
+position += 10;
 }
 }
-
