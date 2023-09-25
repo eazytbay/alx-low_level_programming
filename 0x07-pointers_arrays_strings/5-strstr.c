@@ -19,7 +19,6 @@ if (haystack[x] == needle[x])
 do {
 if (needle[x + 1] == '\0')
 return (haystack);
-while (*haystack)
 x++;
 } while (haystack[x] == needle[x]);
 }
