@@ -3,6 +3,8 @@
  * _sqrt_recursion - A function that returns the
  * natural square root of a number
  * @n: number whose square root is being calculated
+ * @x: A variable that iterates throught possible values to
+ * find the sqaure root of the given number n
  * Return: outcome of the square root of n
  */
 int find_sqrt(int n, int x);
