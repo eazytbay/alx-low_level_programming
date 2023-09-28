@@ -3,6 +3,7 @@
  * is_prime_number - A function that retuns i if the input integer is
  * a prime number
  * @n: Number to check if it is a prime number
+ * @x: the divisor
  * Return: 1 if the integer is a prime number otherwise return 0
  */
 int is_prime_recursive(int n, int x);
