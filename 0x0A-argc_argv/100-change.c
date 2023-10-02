@@ -6,11 +6,11 @@
  * to make change for an amount of money
  * @argv: argument array
  * @argc: argument number
- * Return: Always 0
+ * Return: 1 on error 0 on success
  */
 int main(int argc, char *argv[])
 {
-int cents; 
+int cents;
 int minCoins;
 int a;
 int coins[] = {25, 10, 5, 2, 1};
