@@ -14,7 +14,7 @@ printf("%s\n", argv[0]);
 }
 else
 {
-printf("Program name not found\n");
+printf("cannot find the Program's name\n");
 }
 return (0);
 }
