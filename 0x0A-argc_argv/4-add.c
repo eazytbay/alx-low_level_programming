@@ -4,41 +4,55 @@
 #include <ctype.h>
 #include <string.h>
 /**
- * main - A program that adds postive numbers
+ * addPositiveNumbers - A function that adds postive numbers
  * @argv: argument array
  * @argc: argument number
  * Return: Always 0
  */
-int main(int argc, char *argv[])
+int addPositiveNumbers(int argc, char *argv[])
 {
 int sum = 0;
-int a = 1;
-int b = 0;
-int num = atoi(argv[a]);
+int x = 1;
+int y = 0;
+int num;
 if (argc < 2)
 {
-printf("0\n");
 return (0);
 }
-while (a < argc)
+while (x < argc)
 {
-printf("processing argument: %s\n", argv[a]);
-while (argv[a][b] != '\0')
+char *arg = argv[x];
+while (arg[y] != '\0')
 {
-printf("checking character: %c\n", argv[a][b]);
-if (!isdigit(argv[a][b]))
+if (!isdigit(arg[y]))
 {
-printf("Error\n");
-return (1);
+return (-1);
 }
-b++;
+y++;
 }
+num = atoi(arg);
 if (num > 0)
 {
 sum += num;
 }
-a++;
+x++;
 }
-printf("%d\n", sum);
+return (sum);
+}
+/**
+ * main - A program that adds postive numbers
+ * @argv: argument array
+ * @argc: argument number
+ * Return: 1 on error 0 on success
+ */
+int main(int argc, char *argv[])
+{
+int result = addPositiveNumbers(argc, argv);
+if (result < 0)
+{
+printf("Error\n");
+return (1);
+}
+printf("%d\n", result);
 return (0);
 }
