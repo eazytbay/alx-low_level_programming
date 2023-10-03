@@ -9,16 +9,17 @@
  */
 char *argstostr(int ac, char **av)
 {
-int x, int y, int z, char *arg, int add_length, char *rslt;
+int x = 0, y = 0, z = 0;
+char *arg;
+int add_length = 0;
+char *rslt;
 if (ac == 0 || av == NULL)
 {
 return (NULL);
 }
-add_length = 0;
 for (x = 0; x < ac; x++)
 {
 arg = av[x];
-y = 0;
 while (arg[y] != '\0')
 {
 add_length++;
@@ -31,11 +32,9 @@ if (rslt == NULL)
 {
 return (NULL);
 }
-z = 0;
 for (x = 0; x < ac; x++)
 {
 arg = av[x];
-y = 0;
 while (arg[y] != '\0')
 {
 rslt[z] = arg[y];
