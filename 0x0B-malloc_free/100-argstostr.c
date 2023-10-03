@@ -23,7 +23,6 @@ arg = av[x];
 for (y = 0; arg[y] != '\0'; y++)
 {
 add_length++;
-y++;
 }
 add_length++;
 }
