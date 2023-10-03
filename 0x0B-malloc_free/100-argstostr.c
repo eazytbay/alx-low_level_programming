@@ -20,7 +20,7 @@ return (NULL);
 for (x = 0; x < ac; x++)
 {
 arg = av[x];
-while (arg[y] != '\0')
+for (y = 0; arg[y] != '\0'; y++)
 {
 add_length++;
 y++;
@@ -35,10 +35,9 @@ return (NULL);
 for (x = 0; x < ac; x++)
 {
 arg = av[x];
-while (arg[y] != '\0')
+for (y = 0; arg[y] != '\0'; y++)
 {
 rslt[z] = arg[y];
-y++;
 z++;
 }
 rslt[z] = '\n';
