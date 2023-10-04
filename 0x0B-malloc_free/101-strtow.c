@@ -85,15 +85,19 @@ strncpy(wds[wrd], str + bgn, len);
 wds[wrd][len] = '\0';
 }
 }
-/*strtow - A function that splits a string into words*/
+/**
+ * strtow - A function that splits a string into two words
+ * @str: string to be splitted
+ * Return: An array of words, or NULL  on error
+ */
 char **strtow(char *str)
 {
 int wdct = count_words(str);
 char **wds = (char **)malloc((wdct + 1) * sizeof(char *));
-if (str == NULL || wdct == '\0') /*@str: string to be splitted*/
+if (str == NULL || wdct == '\0')
 return (NULL);
 if (wds == NULL)
 return (NULL);
 split_word(str, wds);
-return (wds); /*Return: An array of words, or NULL on error*/
+return (wds);
 }
