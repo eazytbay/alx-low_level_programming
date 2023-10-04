@@ -1,8 +1,9 @@
 #include "main.h"
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 /**
- * is_space - checks for whitespace character
+ * is_space - A function that checks for whitespace character
  * @c: The character to check
  * Return: 1 if the character is a space character and 0 if it's not
  */
@@ -38,70 +39,61 @@ in_word = 0;
 return (count);
 }
 /**
- * for_strndup - A function that allocates memory for the new string
- * @str: pointer to the source string
- * @n: number of characters
- * Return: pointer to a newly allocated string
- */
-static char *for_strndup(const char *str, int n)
-{
-int i;
-char *copy = (char *)malloc(n + 1);
-if (copy)
-{
-for (i = 0; i < n; i++)
-{
-copy[i] = str[i];
-}
-copy[n] = '\0';
-}
-return (copy);
-}
-/**
- * split_word - splits a string into words
+ * split_word - A function that splits a string into words
  * @str: The string to be split
  * @wds: An array to store the words
  */
 static void split_word(char *str, char **wds)
 {
-int y = 1, i = 0, z = 0;
+int i, wrd = 0, bgn = 0, ent_word = 0;
 for (i = 0; str[i] != '\0'; i++)
 {
 if (!is_space(str[i]))
 {
-while (!is_space(str[i]) && str[i] != '\0')
+if (!ent_word)
 {
-i++;
-}
-wds[z] = for_strndup(&str[y], i - y);
-z++;
+bgn = i;
+ent_word = 1;
 }
 }
-wds[z] = NULL;
+else
+{
+if (ent_word)
+{
+int len = i - bgn;
+wds[wrd] = (char *)malloc(len + 1);
+if (wds[wrd] == NULL)
+{
+return;
 }
-/**
- * strtow - splits a string into words
- * @str: The string to be splitted
- * Return: An array of words, or NULL on error
- */
+strncpy(wds[wrd], str + bgn, len);
+wds[wrd][len] = '\0';
+wrd++;
+ent_word = 0;
+}
+}
+}
+if (ent_word)
+{
+int len = i - bgn;
+wds[wrd] = (char *)malloc(len + 1);
+if (wds[wrd] == NULL)
+{
+return;
+}
+strncpy(wds[wrd], str + bgn, len);
+wds[wrd][len] = '\0';
+}
+}
+/*strtow - A function that splits a string into words*/
 char **strtow(char *str)
 {
-int word_count;
-char **words;
-if (str == NULL || *str == '\0')
-{
+int wdct = count_words(str);
+char **wds = (char **)malloc((wdct + 1) * sizeof(char *));
+if (str == NULL || wdct == '\0') /*@str: string to be splitted*/
 return (NULL);
-}
-word_count = count_words(str);
-if (word_count == 0)
-{
+if (wds == NULL)
 return (NULL);
-}
-words = (char **)malloc((word_count + 1) * sizeof(char *));
-if (words == NULL)
-{
-return (NULL);
-}
-split_word(str, words);
-return (words);
+split_word(str, wds);
+return (wds); /*Return: An array of words, or NULL on error*/
 }
