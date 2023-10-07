@@ -37,5 +37,5 @@ for (x = 0; x < old_size; x++)
 }
 free(ptr);
 }
-return (new_ptr);
+return (ptr);
 }
