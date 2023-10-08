@@ -2,40 +2,51 @@
 #include <stdlib.h>
 /**
  * _realloc - A function that reallocates a memory block
- * @ptr: pointer to the memory previously allocated
- * @old_size: size in bytes
+ * @ptr: pointer to the memory that was previously allocated
+ * @old_size: previous size in bytes
  * @new_size: new size in bytes of the new memory block
  * Return: return ptr and NULL on error
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-void *new_ptr;
-unsigned int x;
-if (new_size == 0)
-{
-free(ptr);
-return (NULL);
+	char *ptr1;
+	char *prev_ptr;
+	unsigned int x;
+
+	if (new_size == old_size)
+		return (ptr);
+
+	if (new_size == 0 && ptr)
+	{
+		free(ptr);
+		return (NULL);
+	}
+
+	if (!ptr)
+		return (malloc(new_size));
+
+	ptr1 = malloc(new_size);
+	if (!ptr1)
+		return (NULL);
+
+	prev_ptr = ptr;
+
+	if (new_size < old_size)
+	{
+		for (x = 0; x < new_size; x++)
+			ptr1[x] = prev_ptr[x];
+	}
+
+	if (new_size > old_size)
+	{
+		for (x = 0; x < old_size; x++)
+			ptr1[x] = prev_ptr[x];
+	}
+
+	free(ptr);
+	return (ptr1);
 }
-if (ptr == NULL)
-{
-return (malloc(new_size));
-}
-if (new_size == old_size)
-{
-return (ptr);
-}
-new_ptr = malloc(new_size);
-if (new_ptr != NULL)
-{
-if (new_size < old_size)
-{
-old_size = new_size;
-}
-for (x = 0; x < old_size; x++)
-{
-((char *)new_ptr)[x] = ((char *)ptr)[x];
-}
-free(ptr);
-}
-return (ptr);
-}
+
+
+
+
