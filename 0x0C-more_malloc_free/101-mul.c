@@ -1,89 +1,110 @@
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#define ERR_MSG "Error"
+
 /**
- * 
-int is_digit(char c)
+ * is_digit - A function that checks for a string
+ * that contains a non-digit char
+ * @s: the string being checked
+ *
+ * Return: 0 for a non-digit and if 1 otherwise
+ */
+int is_digit(char *s)
 {
-    return c >= '0' && c <= '9';
+	int x = 0;
+
+	while (s[x])
+	{
+		if (s[x] < '0' || s[x] > '9')
+			return (0);
+		x++;
+	}
+	return (1);
 }
 
-int main(int argc, char *argv[]) {
-    if (argc != 3) {
-        _putchar('E');
-        _putchar('r');
-        _putchar('r');
-        _putchar('o');
-        _putchar('r');
-        _putchar('\n');
-        exit(98);
-    }
+/**
+ * _strlen -  A function that returns the length of a string
+ * @s: the string whose length is being checked
+ *
+ * Return: the length of the string
+ */
+int _strlen(char *s)
+{
+	int x = 0;
 
-    char *num1 = argv[1];
-    char *num2 = argv[2];
-    int result_len = strlen(num1) + strlen(num2);
-    int *result = (int *)malloc(result_len * sizeof(int));
+	while (s[x] != '\0')
+	{
+		x++;
+	}
+	return (x);
+}
 
-    if (result == NULL) {
-        _putchar('E');
-        _putchar('r');
-        _putchar('r');
-        _putchar('o');
-        _putchar('r');
-        _putchar('\n');
-        exit(98);
-    }
+/**
+ * errors - error handler for main
+ */
+void errors(void)
+{
+	printf("Error\n");
+	exit(98);
+}
 
-    for (int i = 0; i < result_len; i++) {
-        result[i] = 0;
-    }
+/**
+ * main - A progrsm that multiplies two positive numbers
+ * @argc: amount of arguments
+ * @argv: argument array
+ *
+ * Return: always 0 (Success)
+ */
+int main(int argc, char *argv[])
+{
+	char *s1, *s2;
+	int l1, l2, l, x, c, d1, d2, *rslt, y = 0;
 
-    for (int i = strlen(num1) - 1; i >= 0; i--) {
-        if (!is_digit(num1[i])) {
-            _putchar('E');
-            _putchar('r');
-            _putchar('r');
-            _putchar('o');
-            _putchar('r');
-            _putchar('\n');
-            free(result);
-            exit(98);
-        }
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
+		errors();
+	l1 = _strlen(s1);
+	l2 = _strlen(s2);
+	l = l1 + l2 + 1;
+	rslt = malloc(sizeof(int) * l);
+	if (!rslt)
+		return (1);
+	for (x = 0; x <= l1 + l2; x++)
+		rslt[x] = 0;
+	for (l1 = l1 - 1; l1 >= 0; l1--)
+	{
+		d1 = s1[l1] - '0';
+		c = 0;
+		for (l2 = _strlen(s2) - 1; l2 >= 0; l2--)
+		{
+			d2 = s2[l2] - '0';
+			c += rslt[l1 + l2 + 1] + (d1 * d2);
+			rslt[l1 + l2 + 1] = c % 10;
+			c /= 10;
+		}
+		if (c > 0)
+			rslt[l1 + l2 + 1] += c;
+	}
+	for (x = 0; x < l - 1; x++)
+	{
+		if (rslt[x])
+			y = 1;
+		if (y)
+			_putchar(rslt[x] + '0');
+	}
+	if (!y)
+		_putchar('0');
+	_putchar('\n');
+	free(rslt);
+	return (0);
+}
 
-        for (int j = strlen(num2) - 1; j >= 0; j--) {
-            if (!is_digit(num2[j])) {
-                _putchar('E');
-                _putchar('r');
-                _putchar('r');
-                _putchar('o');
-                _putchar('r');
-                _putchar('\n');
-                free(result);
-                exit(98);
-            }
 
-            int product = (num1[i] - '0') * (num2[j] - '0');
-            int sum = result[i + j + 1] + product;
-            result[i + j + 1] = sum % 10;
-            result[i + j] += sum / 10;
-        }
-    }
 
-    int printed = 0;
-    for (int i = 0; i < result_len; i++) {
-        if (result[i] != 0) {
-            printed = 1;
-        }
-        if (printed) {
-            _putchar(result[i] + '0');
-        }
-    }
 
-    if (!printed) {
-        _putchar('0');
-    }
 
-    _putchar('\n');
 
-    free(result);
-    return (0);
+
+
