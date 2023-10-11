@@ -12,26 +12,27 @@
  */
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-int first_num = atoi(argv[1]);
-char *op = argv[2];
-int second_num = atoi(argv[3]);
-int rslt;
+int first_num, second_num;
+char *operation;
 if (argc != 4)
 {
 printf("Error\n");
 exit(98);
 }
-if (get_op_func(op) == NULL || op[1] != '\0')
+first_num = atoi(argv[1]);
+operation = argv[2];
+second_num = atoi(argv[3]);
+if (get_op_func(operation) == NULL || operation[1] != '\0')
 {
 printf("Error\n");
 exit(99);
 }
-if ((*op == '/' && second_num == 0) || (*op == '%' && second_num == 0))
+if ((*operation == '/' && second_num == 0) || (*operation == '%' && second_num == 0))
 {
 printf("Error\n");
 exit(100);
 }
-rslt = get_op_func(op)(first_num, second_num);
-printf("%d\n", rslt);
+printf("%d\n", get_op_func(operation)(first_num, second_num));
 return (0);
 }
+
