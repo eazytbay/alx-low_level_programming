@@ -9,10 +9,8 @@
 int int_index(int *array, int size, int (*cmp)(int))
 {
 int x = 0;
-if (size <= 0)
-{
+if (array == NULL || size <= 0 || cmp == NULL)
 return (-1);
-}
 while (x < size)
 {
 if (cmp(array[x]) != 0)
