@@ -27,7 +27,8 @@ if (get_op_func(operation) == NULL || operation[1] != '\0')
 printf("Error\n");
 exit(99);
 }
-if ((*operation == '/' && second_num == 0) || (*operation == '%' && second_num == 0))
+if ((*operation == '/' && second_num == 0) ||
+(*operation == '%' && second_num == 0))
 {
 printf("Error\n");
 exit(100);
