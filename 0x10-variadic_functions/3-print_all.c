@@ -9,44 +9,40 @@
  */
 void print_all(const char * const format, ...)
 {
-unsigned int x = 0;
-char c, *separator = "", *ptr;
-va_list args;
-va_start(args, format);
-while (format && format[x])
+int x = 0;
+char *ptr, *div = "";
+va_list y;
+va_start(y, format);
+if (format)
 {
-c = format[x];
-switch (c)
+while (format[x])
+{
+switch (format[x])
 {
 case 'c':
-printf("%s%c", separator, va_arg(args, int));
-separator = ", ";
+printf("%s%c", div, va_arg(y, int));
 break;
 case 'i':
-printf("%s%d", separator, va_arg(args, int));
-separator = ", ";
+printf("%s%d", div, va_arg(y, int));
 break;
 case 'f':
-printf("%s%f", separator, va_arg(args, double));
-separator = ", ";
+printf("%s%f", div, va_arg(y, double));
 break;
 case 's':
-{
-ptr = va_arg(args, char*);
-if (ptr == NULL)
-{
-printf("%s(nil)", separator);
-}
-else
-{
-printf("%s%s", separator, ptr);
-}
-separator = ", ";
+ptr = va_arg(y, char *);
+if (!ptr)
+ptr = "(nil)";
+printf("%s%s", div, ptr);
 break;
+default:
+x++;
+continue;
 }
-}
+div = ", ";
 x++;
 }
-va_end(args);
-printf("\n");
 }
+printf("\n");
+va_end(y);
+}
+
