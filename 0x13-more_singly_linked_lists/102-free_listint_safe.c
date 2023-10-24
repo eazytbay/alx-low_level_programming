@@ -11,7 +11,7 @@ int sub;
 listint_t *ephem;
 if (!h || !*h)
 return (0);
-for (; *h; count++)
+while (*h)
 {
 sub = *h - (*h)->next;
 if (sub > 0)
@@ -19,11 +19,13 @@ if (sub > 0)
 ephem = (*h)->next;
 free(*h);
 *h = ephem;
+count++;
 }
 else
 {
 free(*h);
 *h = NULL;
+count++;
 break;
 }
 }
