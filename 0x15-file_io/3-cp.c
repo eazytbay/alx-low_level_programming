@@ -1,21 +1,50 @@
+#include "main.h"
+#include <error.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#define BUFF_SIZE 1024
 /**
- * exit_with_error - A function that Checks and handle file open errors.
- * @exit_code: An integer representing the exit code for the program when an
- * error occurs. It determines the exit status of the program
- * @message: A string that contains an error message to be displayed
- * @file: A string representing the name of the file associated with the error
- * Return: absolutely nothing
+ * exit_error_98 - Looks into error 98
+ * @first_dest: whats being checked
+ * @buffer: simply the buffer
+ * @argv: command line argument
  */
-void exit_with_error(int exit_code, const char *message, const char *file)
+void exit_error_98(int first_dest, char *buffer, char *argv)
 {
-dprintf(STDERR_FILENO, message, file);
-exit(exit_code);
+if (first_dest < 0)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv);
+free(buffer);
+exit(98);
+}
+}
+/**
+ * exit_error_99 - Looks into error 99
+ * @first_dest: whats being checked
+ * @buffer: simply the buffer
+ * @argv: command line argument
+ */
+void exit_error_99(int first_dest, char *buffer, char *argv)
+{
+if (first_dest < 0)
+{
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv);
+free(buffer);
+exit(99);
+}
+}
+/**
+ * exit_error_100 - Looks into error 100
+ * @first_dest: whats being checked
+ * @buffer: simply the buffer
+ */
+void exit_error_100(int first_dest, char *buffer)
+{
+if (first_dest < 0)
+{
+dprintf(STDERR_FILENO, "Error: Can't close fd %i\n", first_dest);
+free(buffer);
+exit(100);
+}
 }
 /**
  * main - A program that copies the content of one file to another.
@@ -23,46 +52,34 @@ exit(exit_code);
  * @argv: command line arguments
  * Return: 0 on success.
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-const char *file_from = argv[1], *file_to = argv[2];
-int fd_from, fd_to;
-ssize_t n;
-char buffer[1024];
+int first_dest, second_dest, rs1, rs2;
+char *buffer;
 if (argc != 3)
 {
-exit_with_error(97, "Usage: cp file_from file_to\n", "");
+dprintf(STDERR_FILENO, "Usage cp file_from file_to\n");
+exit(97);
 }
-fd_from = open(file_from, O_RDONLY);
-if (fd_from == -1)
-{
-exit_with_error(98, "Error: Can't read from file %s\n", file_from);
-}
-fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-if (fd_to == -1)
-{
-exit_with_error(99, "Error: Can't write to %s\n", file_to);
-}
-while ((n = read(fd_from, buffer, sizeof(buffer)) > 0))
-{
-if (write(fd_to, buffer, n) != n)
-{
-exit_with_error(99, "Error: Can't write to %s\n", file_to);
-}
-}
-if (n == -1)
-{
-exit_with_error(98, "Error: Can't read from file %s\n", file_from);
-}
-if (close(fd_from) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
-exit(100);
-}
-if (close(fd_to) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
-exit(100);
-}
+buffer = malloc(sizeof(char) * BUFF_SIZE);
+if (!buffer)
+return (0);
+second_dest = open(argv[1], O_RDONLY);
+exit_error_98(second_dest, buffer, argv[1]);
+first_dest = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
+exit_error_99(first_dest, buffer, argv[2]);
+do {
+rs1 = read(second_dest, buffer, BUFF_SIZE);
+if (rs1 == 0)
+break;
+exit_error_98(rs1, buffer, argv[1]);
+rs2 = write(first_dest, buffer, rs1);
+exit_error_99(rs2, buffer, argv[2]);
+} while (rs2 >= BUFF_SIZE);
+rs1 = close(first_dest);
+exit_error_100(rs1, buffer);
+rs1 = close(second_dest);
+exit_error_100(rs1, buffer);
+free(buffer);
 return (0);
 }
