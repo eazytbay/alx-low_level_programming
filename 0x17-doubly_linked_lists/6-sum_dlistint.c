@@ -10,7 +10,7 @@
  */
 int sum_dlistint(dlistint_t *head)
 {
-unsigned int add_value;	
+unsigned int add_value;
 add_value = 0;
 if (head == NULL)
 return (0);
