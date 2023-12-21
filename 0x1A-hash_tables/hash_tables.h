@@ -40,12 +40,12 @@ unsigned long int hash_djb2(const unsigned char *str);
 
 unsigned long int key_index(const unsigned char *key, unsigned long int size);
 
-hash_node_t *set_pair(const char *key, const char *value);
+hash_node_t *custom_fix_pair(const char *key, const char *value);
 
-int set_pair_only(hash_table_t *ht, const char *key, const char *value,
+int custom_fix_pair_only(hash_table_t *ht, const char *key, const char *value,
 		  unsigned long int size);
 
-int hash_table_set(hash_table_t *ht, const char *key, const char *value);
+int custom_hash_table_fix(hash_table_t *ht, const char *key, const char *value);
 
 char *hash_table_get(const hash_table_t *ht, const char *key);
 
