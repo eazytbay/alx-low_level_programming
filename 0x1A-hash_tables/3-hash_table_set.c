@@ -1,4 +1,5 @@
 #include "hash_tables.h"
+
 /**
  * value_update - A function that changes the value at a key that pre-exists
  * @ht: double pointer to the hash_node_t list
@@ -8,16 +9,13 @@
 void value_update(hash_node_t **ht, const char *key, const char *value)
 {
 hash_node_t *ephem = *ht;
-while (ephem && strcmp(ephem->key, key))
-{
-ephem = ephem->next;
-}
+for (; ephem && strcmp(ephem->key, key); ephem = ephem->next)
+;
 free(ephem->value);
 ephem->value = strdup(value);
 }
 /**
- * key_checker - A function that checks the availability of a
- * key in a hash table
+ * key_checker -  A function that checks the availability of in a hash table
  * @ht: pointer to the hash_node_t list
  * @key: key to look for
  *
@@ -25,19 +23,15 @@ ephem->value = strdup(value);
  */
 int key_checker(hash_node_t *ht, const char *key)
 {
-while (ht)
+for (; ht; ht = ht->next)
 {
 if (!strcmp(ht->key, key))
-{
 return (1);
-}
-ht = ht->next;
 }
 return (0);
 }
-
 /**
- * new_node - A function that includes a new node at the
+ * new_node -  A function that includes a new node at the
  * start of a linked list
  * @head: double pointer to the hash_node_t list
  * @key: new key to add in the node
@@ -50,9 +44,7 @@ hash_node_t *new_node(hash_node_t **head, const char *key, const char *value)
 hash_node_t *comp;
 comp = malloc(sizeof(hash_node_t));
 if (!comp)
-{
 return (NULL);
-}
 comp->key = strdup(key);
 comp->value = strdup(value);
 if (*head == NULL)
@@ -68,7 +60,7 @@ comp->next = (*head);
 return (*head);
 }
 /**
- * custom_hash_table_fix - A function that includes an element
+ * hash_table_set - A function that includes an element
  * to the hash table
  * @ht: hash table to add the element to
  * @key: key of the element, will give the index in the array
@@ -76,13 +68,11 @@ return (*head);
  *
  * Return: 1 on success, 0 otherwise
  */
-int custom_hash_table_fix(hash_table_t *ht, const char *key, const char *value)
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 unsigned long int idx;
 if (!ht || !key || !strcmp(key, "") || !value)
-{
 return (0);
-}
 idx = key_index((unsigned char *)key, ht->size);
 if (key_checker(ht->array[idx], key))
 {
@@ -91,8 +81,6 @@ return (1);
 }
 new_node(&ht->array[idx], key, value);
 if (&ht->array[idx] == NULL)
-{
 return (0);
-}
 return (1);
 }
