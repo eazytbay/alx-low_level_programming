@@ -1,85 +1,86 @@
 #include "hash_tables.h"
+
 /**
- * custom_fix_pair - A function that mallocs a key/value pair
- * to the hash table.
- * @key: The key, a string that's not empty.
- * @value: The value associated with the key, can be an empty string.
- * Return: pointer to the new node.
+ * value_update - A function that changes the value at a key that pre-exists
+ * @ht: double pointer to the hash_node_t list
+ * @key: new key to add in the node
+ * @value: value to add in the node
  */
-hash_node_t *custom_fix_pair(const char *key, const char *value)
+void value_update(hash_node_t **ht, const char *key, const char *value)
 {
-hash_node_t *custom_node = malloc(sizeof(hash_node_t));
-if (custom_node == NULL)
-return (NULL);
-custom_node->key = malloc(strlen(key) + 1);
-if (custom_node->key == NULL)
-return (NULL);
-custom_node->value = malloc(strlen(value) + 1);
-if (custom_node->value == NULL)
-return (NULL);
-strcpy(custom_node->key, key);
-strcpy(custom_node->value, value);
-return (custom_node);
+hash_node_t *ephem = *ht;
+for (; ephem && strcmp(ephem->key, key); ephem = ephem->next)
+;
+free(ephem->value);
+ephem->value = strdup(value);
 }
 /**
- * custom_fix_pair_only - A function that sets key:value pair
- * to first array element
- * @ht: pointer to the hash table.
- * @key: the key, a string that's not empty.
- * @value: the value related with the key, can be an empty string.
- * @index: index of the key.
+ * key_checker -  A function that checks the availability of in a hash table
+ * @ht: pointer to the hash_node_t list
+ * @key: key to look for
  *
- * Return: the node, or NULL if failed.
+ * Return: 1 if the key is found, 0 otherwise
  */
-int custom_fix_pair_only(hash_table_t *ht, const char *key,
-const char *value, unsigned long int index)
+int key_checker(hash_node_t *ht, const char *key)
 {
-hash_node_t *custom_node = custom_fix_pair(key, value);
-if (custom_node == NULL)
-return (0);
-custom_node->next = NULL;
-ht->array[index] = custom_node;
+for (; ht; ht = ht->next)
+{
+if (!strcmp(ht->key, key))
 return (1);
 }
+return (0);
+}
 /**
- * custom_hash_table_fix -A function that includes an
- * element to the hash table.
- * @ht: a pointer to the hash table array.
- * @key: the key, a string that cannot be empty.
- * @value: the value associated with the key, can be an empty string.
+ * new_node -  A function that includes a new node at the
+ * start of a linked list
+ * @head: double pointer to the hash_node_t list
+ * @key: new key to add in the node
+ * @value: value to add in the node
  *
- * Return: 1 on success, 0 on error.
+ * Return: the address of the new element, or NULL if it fails
+ */
+hash_node_t *new_node(hash_node_t **head, const char *key, const char *value)
+{
+hash_node_t *comp;
+comp = malloc(sizeof(hash_node_t));
+if (!comp)
+return (NULL);
+comp->key = strdup(key);
+comp->value = strdup(value);
+if (*head == NULL)
+{
+(*head) = comp;
+comp->next = NULL;
+}
+else
+{
+comp->next = (*head);
+(*head) = comp;
+}
+return (*head);
+}
+/**
+ * custom_hash_table_fix - A function that includes an element
+ * to the hash table
+ * @ht: hash table to add the element to
+ * @key: key of the element, will give the index in the array
+ * @value: value of the element to store in the array
+ *
+ * Return: 1 on success, 0 otherwise
  */
 int custom_hash_table_fix(hash_table_t *ht, const char *key, const char *value)
 {
-unsigned long int idx = key_index((unsigned char *)key, ht->size);
-hash_node_t *custom_node = ht->array[idx];
-if (key == NULL || ht == NULL)
+unsigned long int idx;
+if (!ht || !key || !strcmp(key, "") || !value)
 return (0);
-if (custom_node == NULL)
-return (custom_fix_pair_only(ht, key, value, idx));
-for (; custom_node != NULL; custom_node = custom_node->next)
+idx = key_index((unsigned char *)key, ht->size);
+if (key_checker(ht->array[idx], key))
 {
-if (strcmp(custom_node->key, key) == 0)
-{
-if (strcmp(custom_node->value, value) == 0)
-return (1);
-free(custom_node->value);
-custom_node->value = malloc(strlen(value) + 1);
-if (custom_node->value == NULL)
-return (0);
-strcpy(custom_node->value, value);
+value_update(&ht->array[idx], key, value);
 return (1);
 }
-}
-if (custom_node == NULL)
-{
-custom_node = custom_fix_pair(key, value);
-if (custom_node == NULL)
+new_node(&ht->array[idx], key, value);
+if (&ht->array[idx] == NULL)
 return (0);
-custom_node->next = ht->array[idx];
-ht->array[idx] = custom_node;
 return (1);
-}
-return (0);
 }
