@@ -66,7 +66,8 @@ head->sprev = node;
 }
 return;
 }
-for (; head->snext && strcmp(node->key, head->snext->key) >= 0; head = head->snext)
+for (; head->snext && strcmp(node->key, head->snext->key) >= 0; head =
+head->snext)
 ;
 node->sprev = head;
 if (!head->snext)
