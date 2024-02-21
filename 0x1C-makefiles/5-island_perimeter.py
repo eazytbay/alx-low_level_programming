@@ -18,19 +18,21 @@ def island_perimeter(grid):
     """
     A function that returns the perimeter of the island described in grid
     """
-    width = 0
-    length = 0
-    pred_list = []
-    if len(grid[0]) > 100:
-        return
-        if len(grid) > 100:
-            return
-    for x in range(len(grid)):
-        pred_list.append(grid[x].count(1))
-        if pred_list[x] > 0:
-            length += 1
-    width = max(pred_list)
-    for x in pred_list:
-        if x != width and x > 1:
-            return (length + width) * 2 + 4
-    return (length + width) * 2
+    perimeter = 0
+    for y in range(len(grid)):
+        for x in range(len(grid[0])):
+            if grid[y][x] == 1:
+                perimeter += 4
+                if y > 0:
+                    if grid[y - 1][x] != 0:
+                        perimeter -= 1
+                if y < len(grid) - 1:
+                    if grid[y + 1][x] != 0:
+                        perimeter -= 1
+                if x > 0:
+                    if grid[y][x - 1] != 0:
+                        perimeter -= 1
+                if x < len(grid[0]) - 1:
+                    if grid[y][x + 1] != 0:
+                        perimeter -= 1
+    return perimeter
